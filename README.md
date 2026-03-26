@@ -153,8 +153,6 @@ curl -X DELETE "http://localhost:3000/api/users/1"
 - AI 工具：Codex
 - 使用模型：GPT-5
 - AI 参与环节：
-  - 项目脚手架搭建
-  - 接口设计与分层结构规划
   - 代码生成与整理
   - Swagger 文档与 README 编写
   - 本地构建验证辅助
