@@ -72,6 +72,8 @@ export class UserRepository {
 
     const whereClause = filters.join(" AND ");
     const offset = (query.page - 1) * query.pageSize;
+    const limit = Math.trunc(query.pageSize);
+    const safeOffset = Math.trunc(offset);
 
     const [countRows] = await pool.execute<RowDataPacket[]>(
       `SELECT COUNT(*) AS total FROM users WHERE ${whereClause}`,
@@ -84,9 +86,9 @@ export class UserRepository {
         FROM users
         WHERE ${whereClause}
         ORDER BY id DESC
-        LIMIT ? OFFSET ?
+        LIMIT ${limit} OFFSET ${safeOffset}
       `,
-      [...values, query.pageSize, offset]
+      values
     );
 
     return {
